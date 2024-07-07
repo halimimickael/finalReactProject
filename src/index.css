@@ -3,16 +3,34 @@ body{
     margin: 0;
 }
 
+.header_container{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(82, 190, 128); 
+  width: 100%;
+  height: 80px;
+}
+.icon_style{
+    color: white;
+}  
+
 .linkLook{
     color: white;
     font-size: 30px;
     text-decoration: none;
 }
+
 .listLook{
     display: flex;
     gap: 16px;
     list-style-type: none;
     margin-bottom: 2px;
+}
+
+.pos_search{
+    width: 70%;
+    margin-bottom: 35px;
 }
 
 .listItem{
@@ -23,12 +41,22 @@ body{
     width: 70%;
     display: flex;
     flex-direction: column;
-
+    align-items: center;
 }
 .list{
     margin-top: 50px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 46px;
+}
+
+.list_worker{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 46px;
+    flex-wrap: wrap;
 }
 
 .titleTable{
@@ -47,10 +75,67 @@ body{
 }
 
 .title_card{
+    position: relative;
     width: 100%;
+    height: 50px;
     background-color:rgb(82, 190, 128); 
     color: white;
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: 600;
     display: flex;
     justify-content: center;
+    align-items: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
+
+.box_worker {
+    cursor: pointer;
+    width: 275px;
+    min-height: 300px;
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px -2px;
+    margin-bottom: 32px;
+    align-items: center;
+    transition: background-color 0.3s ease; 
+  }
+  
+  .box_worker:hover {
+    background-color: rgb(82, 190, 128); 
+  }
+  .box_worker:hover .title_bis{
+    color: white; 
+  }
+  .box_worker:hover .class_typo{
+    color: white; 
+  }
+
+.icon_pos{
+    left: 10px;
+    padding: 0 !important;
+    color: inherit !important;
+}
+.title_bis{
+    margin-top: 15px;
+    color:rgb(82, 190, 128); 
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.fav_pos{
+    margin-top: 50px;
+}
+.class_typo{
+    font-size: 18px !important;
+}
+
+.leaflet-container {
+    width: 100%;
+    height: 30vh;
+  }
+  

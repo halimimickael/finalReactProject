@@ -1,20 +1,19 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Card, CardContent, CardMedia, Grid, Typography, IconButton, Snackbar, Alert } from '@mui/material';
+import { Typography, IconButton, Snackbar, Alert } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ModalItem from './ModalItem'; 
+import ModalWorkerDetails from './ModalWorkerDetails'; // Import du nouveau composant
 import { AppContext } from '../context/Context1';
 
 export default function WorkerItem({ item }) {
   const { setWorkerFavoritesAr, worker_Favorites_ar } = useContext(AppContext);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+  const [openModal, setOpenModal] = useState(false); // Renommé open à openModal pour plus de clarté
 
   useEffect(() => {
-    console.log(item)
     setIsFavorite(worker_Favorites_ar.some(favItem => favItem.id === item.id));
   }, [worker_Favorites_ar, item]);
 
@@ -33,37 +32,42 @@ export default function WorkerItem({ item }) {
     setSnackbarOpen(true);
   };
 
-  const handleOpenModal = () => {
-    setIsOpen(true);
-  };
-
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
   };
 
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
+
   return (
-    <Grid item xs={12} sm={12} margin={5}>
-      <Card onClick={handleOpenModal} className='card_cursor'>
-        <CardContent style={{ padding: 0}}>
-          <div className='title_card'>
-            <div>
-              {item.name.first} {item.name.last}
-            </div>
-            <IconButton onClick={toggleFavorite}>
-              {isFavorite ? <FavoriteIcon style={{ color: 'white' }} /> : <FavoriteBorderIcon />}
-            </IconButton>
-          </div>
-          <CardMedia
-            component="img"
-            image={item.picture.medium}
-            alt={item.name}
-          />
-          <Typography variant="body2" color="textSecondary" component="p">
-            {/* Phone: {item.phone} */}
-          </Typography>
-        </CardContent>
-      </Card>
-      <ModalItem open={isOpen} setIsOpen={setIsOpen} />
+    <>
+      <div className='box_worker' onClick={handleOpenModal}> 
+        <div className='title_card'>
+          {item.name.first} {item.name.last}
+          <IconButton onClick={(event) => { event.stopPropagation(); toggleFavorite(event); }} className='icon_pos'>
+            {isFavorite ? <FavoriteIcon style={{ color: 'white' }} /> : <FavoriteBorderIcon />}
+          </IconButton>
+        </div>
+        <div className='title_bis'>
+          Gender
+        </div>
+        <Typography className='class_typo' variant="body2" color="textSecondary" component="p" style={{ textTransform: 'capitalize' }}>
+          {item.gender}
+        </Typography>
+        <div className='title_bis'>
+          phone
+        </div>
+        <Typography className='class_typo' variant="body2" color="textSecondary" component="p">
+          {item.phone}
+        </Typography>
+        <div className='title_bis'>
+          Nationality
+        </div>
+        <img src={`https://flagsapi.com/${item.nat}/shiny/64.png`} alt="Flag" />
+      </div>
+      
+      <ModalWorkerDetails open={openModal} handleCloseModal={handleCloseModal} item={item} /> {/* Utilisation du nouveau composant */}
+      
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={3000}
@@ -73,6 +77,6 @@ export default function WorkerItem({ item }) {
           {snackbarMessage}
         </Alert>
       </Snackbar>
-    </Grid>
+    </>
   );
 }
