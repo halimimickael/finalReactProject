@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Typography, IconButton, Snackbar, Alert } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ModalWorkerDetails from './ModalWorkerDetails'; // Import du nouveau composant
+import ModalWorkerDetails from './ModalWorkerDetails'; 
 import { AppContext } from '../context/Context1';
 
 export default function WorkerItem({ item }) {
@@ -11,11 +11,14 @@ export default function WorkerItem({ item }) {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState('success');
-  const [openModal, setOpenModal] = useState(false); // Renommé open à openModal pour plus de clarté
+  const [openModal, setOpenModal] = useState(false); 
 
   useEffect(() => {
     setIsFavorite(worker_Favorites_ar.some(favItem => favItem.id === item.id));
   }, [worker_Favorites_ar, item]);
+  useEffect(() => {
+    console.log(worker_Favorites_ar)
+  }, [worker_Favorites_ar]);
 
   const toggleFavorite = (event) => {
     event.stopPropagation();
@@ -66,7 +69,7 @@ export default function WorkerItem({ item }) {
         <img src={`https://flagsapi.com/${item.nat}/shiny/64.png`} alt="Flag" />
       </div>
       
-      <ModalWorkerDetails open={openModal} handleCloseModal={handleCloseModal} item={item} /> {/* Utilisation du nouveau composant */}
+      <ModalWorkerDetails open={openModal} handleCloseModal={handleCloseModal} item={item} />
       
       <Snackbar
         open={snackbarOpen}

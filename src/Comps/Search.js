@@ -1,12 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { AppContext } from '../context/Context1';
 import { Button, Grid, TextField } from '@mui/material';
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { seed, setSeed } = useContext(AppContext);
-  const [searchTerm, setSearchTerm] = useState('');
+  const { setSeed, searchTerm, setSearchTerm } = useContext(AppContext);
 
   useEffect(() => {
     const search = searchParams.get('search');
@@ -14,7 +13,7 @@ function Search() {
       setSeed(search);
       setSearchTerm(search);
     }
-  }, [searchParams, setSeed]);
+  }, [searchParams, setSearchTerm, setSeed]);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -28,16 +27,14 @@ function Search() {
 
   return (
     <div>
-      <h2>Search Results for "{seed}"</h2>
       <Grid item xs={12} md={6}>
         <div className='search_button'>
           <TextField
-            label="Change company"
+            label="Search company"
             variant="outlined"
             fullWidth
             value={searchTerm}
             onChange={handleSearchChange}
-            style={{ marginBottom: '20px' }}
           />
           <Button variant="contained" color="primary" onClick={handleSearch}>
             Search

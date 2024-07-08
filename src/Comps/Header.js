@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import BadgeIcon from '@mui/icons-material/Badge';
 import { Link, useLocation } from 'react-router-dom';
+import { AppContext } from '../context/Context1';
 
 export default function Header() {
+  const { setSeed, setSearchTerm } = useContext(AppContext);
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(location.pathname);
 
   useEffect(() => {
     setActiveLink(location.pathname);
-  }, [location.pathname]);
-
+  }, [location.pathname, setActiveLink]);
+  
   const handleLinkClick = (path) => {
+    setSeed('');
+    setSearchTerm('');
     setActiveLink(path);
   };
 

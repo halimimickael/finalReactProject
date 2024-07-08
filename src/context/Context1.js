@@ -11,13 +11,14 @@ export default function ContextProvider({ children }) {
   });
   const [showEdit, setShowEdit] = useState(false);
   const [currentStudentEdit, setCurrentEdit] = useState({});
-  const [seed, setSeed] = useState("abc");
+  const [seed, setSeed] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const { query } = useParams();
 
   useEffect(() => {
     const fetchWorkers = async () => {
       try {
-        const response = await fetch(`https://randomuser.me/api/?results=50&seed=${seed}`);
+        const response = await fetch(`https://randomuser.me/api/?results=50&seed=${seed === "" ? "abc" : seed}`);
         const data = await response.json();
         const workers = data.results;
         setWorkerAr(workers);
@@ -75,6 +76,8 @@ export default function ContextProvider({ children }) {
     setCurrentEdit,
     setSeed,
     seed,
+    setSearchTerm,
+    searchTerm,
     query,
   };
 
