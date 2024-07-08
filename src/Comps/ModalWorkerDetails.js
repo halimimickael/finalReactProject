@@ -11,8 +11,8 @@ const ModalWorkerDetails = ({ open, handleCloseModal, item }) => {
     width: 600,
     maxWidth: '95%',
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
+    borderRadius: '14px',
     p: 4,
   };
 

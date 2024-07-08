@@ -17,7 +17,7 @@ export default function ContextProvider({ children }) {
   useEffect(() => {
     const fetchWorkers = async () => {
       try {
-        const response = await fetch(`https://randomuser.me/api/?results=5&seed=${seed}`);
+        const response = await fetch(`https://randomuser.me/api/?results=50&seed=${seed}`);
         const data = await response.json();
         const workers = data.results;
         setWorkerAr(workers);

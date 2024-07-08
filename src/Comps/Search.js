@@ -1,12 +1,20 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { AppContext } from '../context/Context1';
 import { Button, Grid, TextField } from '@mui/material';
 
 function Search() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const { seed, setSeed } = useContext(AppContext);
   const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    const search = searchParams.get('search');
+    if (search) {
+      setSeed(search);
+      setSearchTerm(search);
+    }
+  }, [searchParams, setSeed]);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -14,8 +22,7 @@ function Search() {
 
   const handleSearch = () => {
     if (searchTerm) {
-      setSeed(searchTerm); 
-      navigate(`/${searchTerm}`); 
+      setSearchParams({ search: searchTerm });
     }
   };
 

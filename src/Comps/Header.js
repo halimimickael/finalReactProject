@@ -1,25 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BadgeIcon from '@mui/icons-material/Badge';
-import { Box, styled } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
-
-const HeaderContainer = styled(Box)(
-  () => `
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgb(82, 190, 128); 
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
-  width: 100%;
-`
-);
-
-const IconStyle = styled(Box)(
-  () => `
-  color: white;
-`
-);
 
 export default function Header() {
   const location = useLocation();
@@ -34,11 +15,11 @@ export default function Header() {
   };
 
   return (
-    <header>
-      <HeaderContainer>
-        <IconStyle>
+    <header className='header_fixed'>
+      <div className='header_container'>
+        <div className='icon_style'>
           <BadgeIcon sx={{ fontSize: 40 }} />
-        </IconStyle>
+        </div>
         <nav className="col-auto">
           <ul className="listLook">
             <li>
@@ -61,7 +42,7 @@ export default function Header() {
             </li>
           </ul>
         </nav>
-      </HeaderContainer>
+      </div>
     </header>
   );
 }
