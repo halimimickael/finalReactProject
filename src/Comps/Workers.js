@@ -12,7 +12,7 @@ export default function Workers() {
       <div className='workers_map'>
         {worker_ar.map(item => (
           <Grid key={item.id} item xs={6} md={4}>
-            <WorkerItem item={item} />
+            <WorkerItem item={item} key={item.id.value}/>
           </Grid>
         ))}
       </div>
