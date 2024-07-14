@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { AppContext } from '../context/Context1';
 import WorkerItem from './WorkerItem';
 import { Grid } from '@mui/material';

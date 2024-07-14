@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { AppContext } from '../context/Context1';
 import Search from './Search';
 import { useSearchParams } from 'react-router-dom';

@@ -9,8 +9,6 @@ export default function ContextProvider({ children }) {
     const storedFavorites = localStorage.getItem("worker_Favorites_ar");
     return storedFavorites ? JSON.parse(storedFavorites) : [];
   });
-  const [showEdit, setShowEdit] = useState(false);
-  const [currentStudentEdit, setCurrentEdit] = useState({});
   const [seed, setSeed] = useState("");
   const [searchTerm, setSearchTerm] = useState('');
   const { query } = useParams();
@@ -35,44 +33,11 @@ export default function ContextProvider({ children }) {
     localStorage.setItem("worker_Favorites_ar", JSON.stringify(worker_Favorites_ar));
   }, [worker_Favorites_ar]);
 
-  const addStudent = (newItem) => {
-    setWorkerAr([...worker_ar, newItem]);
-    localStorage.setItem("worker_ar", JSON.stringify([...worker_ar, newItem]));
-  };
-
-  const resetList = () => {
-    if (window.confirm("Delete all?")) {
-      setWorkerAr([]);
-      localStorage.setItem("worker_ar", JSON.stringify([]));
-    }
-  };
-
-  const deleteStudent = (_id) => {
-    const filter_ar = worker_ar.filter((item) => item.id !== _id);
-    setWorkerAr(filter_ar);
-    localStorage.setItem("worker_ar", JSON.stringify(filter_ar));
-  };
-
-  const updatedStudent = (id, updatedStudent) => {
-    const updatedArray = worker_ar.map((student) =>
-      student.id === id ? { ...student, ...updatedStudent } : student
-    );
-    setWorkerAr(updatedArray);
-    localStorage.setItem("worker_ar", JSON.stringify(updatedArray));
-  };
 
   const globalVal = {
     setWorkerFavoritesAr,
     worker_Favorites_ar,
     worker_ar,
-    addStudent,
-    resetList,
-    deleteStudent,
-    updatedStudent,
-    showEdit,
-    setShowEdit,
-    currentStudentEdit,
-    setCurrentEdit,
     setSeed,
     seed,
     setSearchTerm,
