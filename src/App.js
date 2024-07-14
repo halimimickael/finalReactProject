@@ -5,6 +5,7 @@ import Home from './Comps/Home';
 import Favorites from './Comps/Favorites';
 import ContextProvider from './context/Context1';
 import MoreInfo from './Comps/MoreInfo';
+import NotFound from './Comps/NotFound';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/favorite/employee" element={<MoreInfo />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </ContextProvider>

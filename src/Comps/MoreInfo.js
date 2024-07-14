@@ -23,7 +23,7 @@ export default function MoreInfo() {
     }
 
     return (
-        <div style={{margin : '100px '}}>
+        <div className='more_info'>
             {worker ? (
                 <div>
                     <h2 className='title_bis'>More Info</h2>

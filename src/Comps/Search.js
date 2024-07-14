@@ -36,7 +36,7 @@ function Search() {
             value={searchTerm}
             onChange={handleSearchChange}
           />
-          <Button variant="contained" color="primary" onClick={handleSearch}>
+          <Button variant="contained" onClick={handleSearch} style={{color : 'white', backgroundColor :'rgb(82, 190, 128)'}}>
             Search
           </Button>
         </div>

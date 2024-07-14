@@ -38,6 +38,10 @@ body {
     font-size: 28px;
     text-decoration: none;
   }
+
+  .linkLook.active {
+    font-weight: bold;
+  }
   
   .listLook {
     display: flex;
@@ -69,6 +73,14 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     gap: 46px;
+  }
+  .more_info{
+    margin: 120px 0 120px 201px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    flex-wrap: nowrap;
+    flex-direction: column;
   }
   
   .list_worker {
