@@ -23,7 +23,6 @@ export default function ContextProvider({ children }) {
         const workers = data.results;
         setWorkerAr(workers);
         localStorage.setItem("worker_ar", JSON.stringify(workers));
-        console.log("Data successfully recovered :", workers);
       } catch (error) {
         console.error("Error retrieving data :", error);
       }

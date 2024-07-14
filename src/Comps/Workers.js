@@ -11,7 +11,7 @@ export default function Workers() {
       {seed && <h2>Search Results for "{seed}"</h2>}
       <div className='workers_map'>
         {worker_ar.map(item => (
-          <Grid key={item.id} item xs={6} md={4}>
+          <Grid key={item.dob.date} item xs={6} md={4}>
             <WorkerItem item={item} key={item.id.value}/>
           </Grid>
         ))}
