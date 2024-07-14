@@ -8,10 +8,10 @@ function Search() {
   const { setSeed, searchTerm, setSearchTerm } = useContext(AppContext);
 
   useEffect(() => {
-    const search = searchParams.get('search');
-    if (search) {
-      setSeed(search);
-      setSearchTerm(search);
+    const company = searchParams.get('company');
+    if (company) {
+      setSeed(company);
+      setSearchTerm(company);
     }
   }, [searchParams, setSearchTerm, setSeed]);
 
@@ -21,7 +21,7 @@ function Search() {
 
   const handleSearch = () => {
     if (searchTerm) {
-      setSearchParams({ search: searchTerm });
+      setSearchParams({ company: searchTerm });
     }
   };
 

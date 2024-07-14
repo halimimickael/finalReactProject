@@ -2,29 +2,28 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Typography, IconButton, Snackbar, Alert } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Link } from 'react-router-dom';
 import ModalWorkerDetails from './ModalWorkerDetails'; 
 import { AppContext } from '../context/Context1';
 
-export default function WorkerItem({ item }) {
+export default function WorkerItem({ item, isFavoriteItem, index }) {
   const { setWorkerFavoritesAr, worker_Favorites_ar } = useContext(AppContext);
   const [isFavorite, setIsFavorite] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState('success');
-  const [openModal, setOpenModal] = useState(false); 
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    setIsFavorite(worker_Favorites_ar.some(favItem => favItem.id === item.id));
+    setIsFavorite(worker_Favorites_ar.some(favItem => favItem.login.username === item.login.username));
   }, [worker_Favorites_ar, item]);
-  useEffect(() => {
-    console.log(worker_Favorites_ar)
-  }, [worker_Favorites_ar]);
 
   const toggleFavorite = (event) => {
     event.stopPropagation();
     setIsFavorite(!isFavorite);
+
     if (isFavorite) {
-      setWorkerFavoritesAr(prevFavorites => prevFavorites.filter(favItem => favItem.id !== item.id));
+      setWorkerFavoritesAr(prevFavorites => prevFavorites.filter(favItem => favItem.login.username !== item.login.username));
       setSnackbarMessage("Worker removed from favorites");
       setSnackbarSeverity('error');
     } else {
@@ -32,6 +31,7 @@ export default function WorkerItem({ item }) {
       setSnackbarMessage("Worker added to favorites");
       setSnackbarSeverity('success');
     }
+
     setSnackbarOpen(true);
   };
 
@@ -44,7 +44,7 @@ export default function WorkerItem({ item }) {
 
   return (
     <>
-      <div className='box_worker' onClick={handleOpenModal}> 
+      <div className='box_worker' onClick={handleOpenModal}>
         <div className='title_card'>
           {item.name.first} {item.name.last}
           <IconButton onClick={(event) => { event.stopPropagation(); toggleFavorite(event); }} className='icon_pos'>
@@ -67,10 +67,20 @@ export default function WorkerItem({ item }) {
           Nationality
         </div>
         <img src={`https://flagsapi.com/${item.nat}/shiny/64.png`} alt="Flag" />
+        
+        {isFavoriteItem ? (
+          <Link to={`/favorite/employee/?index=${worker_Favorites_ar.findIndex(favItem => favItem.login.username === item.login.username)}`} style={{ textDecoration: 'none' }}>
+            <div>
+              click for more info
+            </div>
+          </Link>
+        ) : null}
       </div>
-      
-      <ModalWorkerDetails open={openModal} handleCloseModal={handleCloseModal} item={item} />
-      
+
+      {!isFavoriteItem ? (
+          <ModalWorkerDetails open={openModal} handleCloseModal={handleCloseModal} item={item} />
+        ) : null}
+
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={3000}
